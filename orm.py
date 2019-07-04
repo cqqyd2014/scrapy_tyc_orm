@@ -96,6 +96,63 @@ class SystemCode(Base):
             db_data.code_type = self.code_type
 
 
+class CompanyBaseInfo(Base):
+    __tablename__ = "company_base_info"
+    c_name=Column(String(1024), unique=True)
+    c_uscc=Column(String(64), unique=True)
+    c_reg_capital=Column(Numeric)
+    c_real_capital=Column(Numeric)
+    c_start_date=Column(Date)
+    c_status=Column(String(64))
+    c_reg_code=Column(String(64))
+    c_type=Column(String(64))
+    c_industry=Column(String(64))
+    c_permit_date=Column(Date)
+    c_permit_gov=Column(String(512))
+    c_business_period=Column(String(512))
+    c_tax_level=Column(String(512))
+    c_staff=Column(Integer)
+    c_old_name=Column(String(512))
+    c_english_name=Column(String(1024))#英文名称
+    c_social_security_staff=Column(Integer)#参保人数
+    c_addr=Column(String(1024))
+    c_business=Column(Text)
+    c_company_id=Column(Integer, primary_key=True)
+
+    
+    def saveOfUpdate(self, session):
+        db_data = session.query(CompanyBaseInfo).filter(
+            CompanyBaseInfo.c_company_id == self.c_company_id).one_or_none()
+        if db_data == None:
+            session.add(self)
+        else:
+            db_data.c_name=self.c_name
+            
+
+    @staticmethod
+    def delete_all(db_session):
+        db_session.query(CompanyBaseInfo).all().delete()
+        #print("删除成功")
+
+
+    def __repr__(self):
+        return self.c_name+self.c_uscc+'/'+self.c_tianyancha_company_id
+
+    def to_json(self):
+        json_string = {
+            'c_company_id': self.c_company_id,
+            'c_name': self.c_name,
+            'c_reg_capital':self.c_reg_capital,
+            'c_real_capital':self.c_real_capital,
+
+            'c_start_date': json.dumps(self.c_start_date, cls=DateTimeEncoder),
+            
+
+        }
+        return json_string
+
+
+
 '''
 #当前系统中的节点标签
 class CurrentNodeLabels(Base):
