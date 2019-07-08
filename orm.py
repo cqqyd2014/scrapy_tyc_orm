@@ -106,14 +106,14 @@ class CompanyBaseInfo(Base):
     c_status=Column(String(64))
     c_tax_code=Column(String(64))
     c_org_code=Column(String(64))
-    c_reg_code=Column(String(64))
+    c_reg_code=Column(String(64))#工商注册号
     c_type=Column(String(64))
     c_industry=Column(String(64))
     c_permit_date=Column(Date)
     c_permit_gov=Column(String(512))
     c_business_period=Column(String(512))
     c_tax_level=Column(String(512))
-    c_staff=Column(Integer)
+    c_staff=Column(String(512))
     c_old_name=Column(String(512))
     c_english_name=Column(String(1024))#英文名称
     c_social_security_staff=Column(Integer)#参保人数
