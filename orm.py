@@ -99,11 +99,13 @@ class SystemCode(Base):
 class CompanyBaseInfo(Base):
     __tablename__ = "company_base_info"
     c_name=Column(String(1024), unique=True)
-    c_uscc=Column(String(64), unique=True)
+    c_uscc=Column(String(64), unique=True)#统一社会信用代码
     c_reg_capital=Column(Numeric)
     c_real_capital=Column(Numeric)
     c_start_date=Column(Date)
     c_status=Column(String(64))
+    c_tax_code=Column(String(64))
+    c_org_code=Column(String(64))
     c_reg_code=Column(String(64))
     c_type=Column(String(64))
     c_industry=Column(String(64))
@@ -127,7 +129,28 @@ class CompanyBaseInfo(Base):
             session.add(self)
         else:
             db_data.c_name=self.c_name
-            
+            db_data.c_uscc=self.c_uscc
+            db_data.c_reg_capital=self.c_reg_capital
+            db_data.c_real_capital=self.c_real_capital
+            db_data.c_start_date=self.c_start_date
+            db_data.c_status=self.c_status
+            db_data.c_tax_code=self.c_tax_code
+            db_data.c_org_code=self.c_org_code
+            db_data.c_reg_code=self.c_reg_code
+            db_data.c_type=self.c_type
+            db_data.c_industry=self.c_industry
+            db_data.c_permit_date=self.c_permit_date
+            db_data.c_permit_gov=self.c_permit_gov
+            db_data.c_business_period=self.c_business_period
+            db_data.c_tax_level=self.c_tax_level
+            db_data.c_staff=self.c_staff
+            db_data.c_old_name=self.c_old_name
+            db_data.c_english_name=self.c_english_name
+            db_data.c_social_security_staff=self.c_social_security_staff
+            db_data.c_addr=self.c_addr
+            db_data.c_business=self.c_business
+            db_data.c_company_id=self.c_company_id
+
 
     @staticmethod
     def delete_all(db_session):
