@@ -12,8 +12,9 @@ import json
 from python_common.common import DateTimeEncoder
 
 
-postgresql_conn_str = "postgresql+psycopg2://postgres:Wang1980@localhost:33133/tyc"
-engine = create_engine(postgresql_conn_str, isolation_level = 'READ COMMITTED')
+postgresql_conn_str = "oracle://test1:Wang1980@localhost:1521/orcl"
+#"postgresql+psycopg2://postgres:Wang1980@localhost:33133/tyc"
+engine = create_engine(postgresql_conn_str)
 
 # mysql_conn_str='mysql+mysqldb://root:Wang1980@localhost:3306/mosr?charset=utf8mb4'
 # engine=create_engine(mysql_conn_str)
