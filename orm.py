@@ -103,10 +103,10 @@ class CurrentShareholderInfo(Base):
     c_shareholder_href=Column(String(1024))
     c_shareholder_percent=Column(Numeric)
     c_shareholder_amount=Column(Numeric)
-    c_shareholder_type=Column(String(64))#company#man
-    c_tianyancha_id=Column(Integer)
+    c_shareholder_type=Column(String(64))#company#human
     
-    c_company_id=Column(Integer, primary_key=True)
+    
+    c_company_id=Column(String(64), primary_key=True)
 
     
     def saveOfUpdate(self, session):
@@ -173,7 +173,7 @@ class CompanyBaseInfo(Base):
     c_social_security_staff=Column(Integer)#参保人数
     c_addr=Column(String(1024))
     c_business=Column(Text)
-    c_company_id=Column(Integer, primary_key=True)
+    c_company_id=Column(String(64), primary_key=True)
     c_tianyancha_link=Column(String(1024))
 
     
