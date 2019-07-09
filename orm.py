@@ -96,6 +96,60 @@ class SystemCode(Base):
             db_data.code_type = self.code_type
 
 
+class CurrentShareholderInfo(Base):
+    __tablename__ = "current_shareholder_info"
+    c_shareholder_order=Column(Integer, primary_key=True)
+    c_shareholder_name=Column(String(512))
+    c_shareholder_href=Column(String(1024))
+    c_shareholder_percent=Column(Numeric)
+    c_shareholder_amount=Column(Numeric)
+    c_shareholder_type=Column(String(64))#company#man
+    c_tianyancha_id=Column(Integer)
+    
+    c_company_id=Column(Integer, primary_key=True)
+
+    
+    def saveOfUpdate(self, session):
+        db_data = session.query(CurrentShareholderInfo).filter(
+            CurrentShareholderInfo.c_company_id == self.c_company_id,CurrentShareholderInfo.c_shareholder_order==self.c_shareholder_order).one_or_none()
+        if db_data == None:
+            session.add(self)
+        else:
+            db_data.c_shareholder_order=self.c_shareholder_order
+            db_data.c_shareholder_name=self.c_shareholder_name
+            db_data.c_shareholder_href=self.c_shareholder_href
+            db_data.c_shareholder_percent=self.c_shareholder_percent
+            db_data.c_shareholder_amount=self.c_shareholder_amount
+            db_data.c_company_id=self.c_company_id
+            db_data.c_shareholder_type=self.c_shareholder_type
+            db_data.c_tianyancha_id=self.c_tianyancha_id
+
+
+
+    @staticmethod
+    def delete_all(db_session):
+        db_session.query(CurrentShareholderInfo).all().delete()
+        #print("删除成功")
+
+
+    def __repr__(self):
+        return self.c_company_id+self.c_shareholder_order+'/'+self.c_shareholder_name
+
+    def to_json(self):
+        json_string = {
+            'c_company_id': self.c_company_id,
+            'c_shareholder_order': self.c_shareholder_order,
+            'c_shareholder_name':self.c_shareholder_name,
+            'c_shareholder_href':self.c_shareholder_href,
+            'c_shareholder_amount':self.c_shareholder_amount,
+            'c_shareholder_percent': self.c_shareholder_percent,
+            'c_shareholder_type':self.c_shareholder_type,
+            'c_tianyancha_id':self.c_tianyancha_id
+
+        }
+        return json_string
+
+
 class CompanyBaseInfo(Base):
     __tablename__ = "company_base_info"
     c_name=Column(String(1024), unique=True)
@@ -120,6 +174,7 @@ class CompanyBaseInfo(Base):
     c_addr=Column(String(1024))
     c_business=Column(Text)
     c_company_id=Column(Integer, primary_key=True)
+    c_tianyancha_link=Column(String(1024))
 
     
     def saveOfUpdate(self, session):
@@ -150,6 +205,7 @@ class CompanyBaseInfo(Base):
             db_data.c_addr=self.c_addr
             db_data.c_business=self.c_business
             db_data.c_company_id=self.c_company_id
+            db_data.c_tianyancha_link=self.c_tianyancha_link
 
 
     @staticmethod
@@ -167,7 +223,7 @@ class CompanyBaseInfo(Base):
             'c_name': self.c_name,
             'c_reg_capital':self.c_reg_capital,
             'c_real_capital':self.c_real_capital,
-
+            'c_tianyancha_link':self.c_tianyancha_link,
             'c_start_date': json.dumps(self.c_start_date, cls=DateTimeEncoder),
             
 
