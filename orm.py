@@ -147,9 +147,9 @@ class CompanyMainMember(Base):
     __tablename__ = "compnay_main_meber"
     c_member_order=Column(Integer, primary_key=True)
     c_member_id=Column(String(512))
-    c_memeber_href=Column(String(1024))
-    c_memeber_type=Column(String(512))
-    c_memeber_job=Column(String(512))
+    c_member_href=Column(String(1024))
+    c_member_type=Column(String(512))
+    c_member_job=Column(String(512))
     
 
     c_company_id=Column(String(64), primary_key=True)
@@ -162,9 +162,9 @@ class CompanyMainMember(Base):
             session.add(self)
         else:
             db_data.c_member_id=self.c_member_id
-            db_data.c_memeber_href=self.c_memeber_href
-            db_data.c_memeber_type=self.c_memeber_type
-            db_data.c_memeber_job=self.c_memeber_job
+            db_data.c_member_href=self.c_member_href
+            db_data.c_member_type=self.c_member_type
+            db_data.c_member_job=self.c_member_job
             
 
 
@@ -184,9 +184,9 @@ class CompanyMainMember(Base):
             'c_member_order': self.c_member_order,
             
             'c_member_id':self.c_member_id,
-            'c_memeber_href':self.c_memeber_href,
-            'c_memeber_type': self.c_memeber_type,
-            'c_memeber_job': self.c_memeber_job,
+            'c_member_href':self.c_member_href,
+            'c_member_type': self.c_member_type,
+            'c_member_job': self.c_member_job,
             
 
         }
