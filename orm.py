@@ -254,6 +254,9 @@ class CompanyShareholderInfo(Base):
 
 class CompanyBaseInfo(Base):
     __tablename__ = "company_base_info"
+    c_lawman_id=Column(String(64))
+    c_lawman_name=Column(String(128))
+    c_lawman_href=Column(String(1024))
     c_name=Column(String(1024), unique=True)
     c_uscc=Column(String(64), unique=True)#统一社会信用代码
     c_reg_capital=Column(Numeric)
@@ -308,6 +311,10 @@ class CompanyBaseInfo(Base):
             db_data.c_business=self.c_business
             db_data.c_company_id=self.c_company_id
             db_data.c_tianyancha_link=self.c_tianyancha_link
+            db_data.c_lawman_id=self.c_lawman_id
+            db_data.c_lawman_name=self.c_lawman_name
+            db_data.c_lawman_href=self.c_lawman_href
+
 
 
     @staticmethod
@@ -327,6 +334,16 @@ class CompanyBaseInfo(Base):
             'c_real_capital':self.c_real_capital,
             'c_tianyancha_link':self.c_tianyancha_link,
             'c_start_date': json.dumps(self.c_start_date, cls=DateTimeEncoder),
+            'c_lawman_id': self.c_lawman_id,
+            'c_lawman_name': self.c_lawman_name,
+            'c_lawman_href': self.c_lawman_href,
+            'c_uscc': self.c_uscc,
+            'c_status': self.c_status,
+            'c_tax_code': self.c_tax_code,
+            'c_org_code': self.c_org_code,
+            'c_reg_code': self.c_reg_code,
+            'c_type': self.c_type,
+
             
 
         }
