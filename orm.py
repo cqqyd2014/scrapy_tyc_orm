@@ -100,6 +100,7 @@ class CurrentShareholderInfo(Base):
     __tablename__ = "current_shareholder_info"
     c_shareholder_order=Column(Integer, primary_key=True)
     c_shareholder_name=Column(String(512))
+    c_shareholder_id=Column(String(512))
     c_shareholder_href=Column(String(1024))
     c_shareholder_percent=Column(Numeric)
     c_shareholder_amount=Column(Numeric)
@@ -123,6 +124,7 @@ class CurrentShareholderInfo(Base):
             db_data.c_company_id=self.c_company_id
             db_data.c_shareholder_type=self.c_shareholder_type
             db_data.c_tianyancha_id=self.c_tianyancha_id
+            db_data.c_shareholder_id=self.c_shareholder_id
 
 
 
