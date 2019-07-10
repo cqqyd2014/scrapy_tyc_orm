@@ -195,6 +195,100 @@ class CompanyMainMember(Base):
         return json_string
 
 
+class CompanyInvestment(Base):
+    __tablename__ = "compnay_investment"
+    c_investment_order=Column(Integer, primary_key=True)
+    c_investment_id=Column(String(512))
+    c_investment_href=Column(String(1024))
+    c_investment_type=Column(String(512))
+    
+    c_investment_name=Column(String(512))
+
+    c_company_id=Column(String(64), primary_key=True)
+    c_lawman_id=Column(String(512))
+    c_lawman_href=Column(String(1024))
+    c_lawman_type=Column(String(512))
+    c_lawman_name=Column(String(512))
+    c_investment_startdate=Column(Date)
+    c_investment_amount=Column(Numeric)
+    c_investment_percent=Column(Numeric)
+    c_investment_status=Column(String(64))
+    c_investment_brand_name=Column(String(512))
+    c_investment_brand_id=Column(String(512))
+    c_investment_brand_href=Column(String(1024))
+    c_investment_organize_name=Column(String(512))
+    c_investment_organize_id=Column(String(512))
+    c_investment_organize_href=Column(String(1024))
+
+    
+    def saveOfUpdate(self, session):
+        db_data = session.query(CompanyInvestment).filter(
+            CompanyInvestment.c_company_id == self.c_company_id,CompanyInvestment.c_member_order==self.c_member_order).one_or_none()
+        if db_data == None:
+            session.add(self)
+        else:
+            db_data.c_investment_id=self.c_investment_id
+            db_data.c_investment_href=self.c_investment_href
+            db_data.c_investment_type=self.c_investment_type
+            db_data.c_investment_name=self.c_investment_name
+            db_data.c_lawman_id=self.c_lawman_id
+            db_data.c_lawman_href=self.c_lawman_href
+            db_data.c_lawman_type=self.c_lawman_type
+            db_data.c_lawman_name=self.c_lawman_name
+            db_data.c_investment_startdate=self.c_investment_startdate
+            db_data.c_investment_amount=self.c_investment_amount
+            db_data.c_investment_percent=self.c_investment_percent
+            db_data.c_investment_status=self.c_investment_status
+            db_data.c_investment_brand_name=self.c_investment_brand_name
+            db_data.c_investment_brand_id=self.c_investment_brand_id
+            db_data.c_investment_brand_href=self.c_investment_brand_href
+            db_data.c_investment_organize_name=self.c_investment_organize_name
+            db_data.c_investment_organize_id=self.c_investment_organize_id
+            db_data.c_investment_organize_href=self.c_investment_organize_href
+            
+            
+            
+            
+
+
+
+    @staticmethod
+    def delete_all(db_session):
+        db_session.query(CompanyMainMember).all().delete()
+        #print("删除成功")
+
+
+    def __repr__(self):
+        return self.c_company_id+self.c_member_order
+
+    def to_json(self):
+        json_string = {
+            'c_company_id': self.c_company_id,
+            'c_investment_order': self.c_investment_order,
+            'c_investment_id':self.c_investment_id,
+            'c_investment_href':self.c_investment_href,
+            'c_investment_type':self.c_investment_type,
+            'c_investment_name': self.c_investment_name,
+            'c_lawman_href': self.c_lawman_href,
+            'c_lawman_type': self.c_lawman_type,
+            'c_lawman_id': self.c_lawman_id,
+            'c_lawman_name': self.c_lawman_name,
+            'c_investment_startdate': json.dumps(self.c_investment_startdate, cls=DateTimeEncoder),
+            'c_investment_amount': self.c_investment_amount,
+            'c_investment_percent': self.c_investment_percent,
+            'c_investment_status': self.c_investment_status,
+            'c_investment_brand_name': self.c_investment_brand_name,
+            'c_lawman_id': self.c_lawman_id,'c_lawman_id': self.c_lawman_id,
+            'c_lawman_id': self.c_lawman_id,
+            'c_lawman_id': self.c_lawman_id,
+            'c_lawman_id': self.c_lawman_id,
+
+            
+
+        }
+        return json_string
+
+
 class CompanyShareholderInfo(Base):
     __tablename__ = "company_shareholder_info"
     c_shareholder_order=Column(Integer, primary_key=True)
