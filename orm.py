@@ -100,7 +100,7 @@ class CurrentShareholderInfo(Base):
     __tablename__ = "current_shareholder_info"
     c_shareholder_order=Column(Integer, primary_key=True)
     c_shareholder_name=Column(String(512))
-    c_tianyancha_id=Column(String(512))
+    c_company_id=Column(String(512))
     c_shareholder_id=Column(String(512))
     c_shareholder_href=Column(String(1024))
     c_shareholder_percent=Column(Numeric)
