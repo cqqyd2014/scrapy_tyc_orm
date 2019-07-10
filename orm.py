@@ -150,7 +150,7 @@ class CompanyMainMember(Base):
     c_member_href=Column(String(1024))
     c_member_type=Column(String(512))
     c_member_job=Column(String(512))
-    
+    c_member_name=Column(String(512))
 
     c_company_id=Column(String(64), primary_key=True)
 
@@ -165,6 +165,8 @@ class CompanyMainMember(Base):
             db_data.c_member_href=self.c_member_href
             db_data.c_member_type=self.c_member_type
             db_data.c_member_job=self.c_member_job
+            db_data.c_member_name=self.c_member_name
+            
             
 
 
@@ -182,7 +184,7 @@ class CompanyMainMember(Base):
         json_string = {
             'c_company_id': self.c_company_id,
             'c_member_order': self.c_member_order,
-            
+            'c_member_name':self.c_member_name,
             'c_member_id':self.c_member_id,
             'c_member_href':self.c_member_href,
             'c_member_type': self.c_member_type,
