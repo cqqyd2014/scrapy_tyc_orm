@@ -145,7 +145,7 @@ class CompanyChangeLog(Base):
 
 class CompanyMainMember(Base):
     __tablename__ = "compnay_main_meber"
-    c_member_order=Column(Integer, primary_key=Trube)
+    c_member_order=Column(Integer, primary_key=True)
     c_member_id=Column(String(512))
     c_memeber_href=Column(String(1024))
     c_memeber_type=Column(String(512))
