@@ -143,9 +143,58 @@ class CompanyChangeLog(Base):
         }
         return json_string
 
+class CompanyMainMember(Base):
+    __tablename__ = "compnay_main_meber"
+    c_member_order=Column(Integer, primary_key=Trube)
+    c_member_id=Column(String(512))
+    c_memeber_href=Column(String(1024))
+    c_memeber_type=Column(String(512))
+    c_memeber_job=Column(String(512))
+    
 
-class CurrentShareholderInfo(Base):
-    __tablename__ = "current_shareholder_info"
+    c_company_id=Column(String(64), primary_key=True)
+
+    
+    def saveOfUpdate(self, session):
+        db_data = session.query(CompanyMainMember).filter(
+            CompanyMainMember.c_company_id == self.c_company_id,CompanyMainMember.c_member_order==self.c_member_order).one_or_none()
+        if db_data == None:
+            session.add(self)
+        else:
+            db_data.c_member_id=self.c_member_id
+            db_data.c_memeber_href=self.c_memeber_href
+            db_data.c_memeber_type=self.c_memeber_type
+            db_data.c_memeber_job=self.c_memeber_job
+            
+
+
+
+    @staticmethod
+    def delete_all(db_session):
+        db_session.query(CompanyMainMember).all().delete()
+        #print("删除成功")
+
+
+    def __repr__(self):
+        return self.c_company_id+self.c_member_order
+
+    def to_json(self):
+        json_string = {
+            'c_company_id': self.c_company_id,
+            'c_member_order': self.c_member_order,
+            
+            'c_member_id':self.c_member_id,
+            'c_memeber_href':self.c_memeber_href,
+            'c_memeber_type': self.c_memeber_type,
+            'c_memeber_job': self.c_memeber_job,
+            
+
+        }
+        return json_string
+
+
+class CompanyShareholderInfo(Base):
+    __tablename__ = "company_shareholder_info"
     c_shareholder_order=Column(Integer, primary_key=True)
     c_shareholder_name=Column(String(512))
     c_company_id=Column(String(512))
@@ -160,8 +209,8 @@ class CurrentShareholderInfo(Base):
 
     
     def saveOfUpdate(self, session):
-        db_data = session.query(CurrentShareholderInfo).filter(
-            CurrentShareholderInfo.c_company_id == self.c_company_id,CurrentShareholderInfo.c_shareholder_order==self.c_shareholder_order).one_or_none()
+        db_data = session.query(CompanyShareholderInfo).filter(
+            CompanyShareholderInfo.c_company_id == self.c_company_id,CompanyShareholderInfo.c_shareholder_order==self.c_shareholder_order).one_or_none()
         if db_data == None:
             session.add(self)
         else:
